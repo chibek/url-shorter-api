@@ -12,6 +12,10 @@ export class ContextUrlService {
     ) {
     }
 
+    findOne(id): Promise<Url> {
+        return this.urlRepository.findOneOrFail(id)
+    }
+
     findAll(): Promise<Url[]> {
         return this.urlRepository.find();
     }

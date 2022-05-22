@@ -1,5 +1,5 @@
 import {ObjectType, Field} from '@nestjs/graphql';
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 @ObjectType()
 @Entity()
@@ -20,11 +20,19 @@ export class Url {
     @Field(() => String)
     longUrl: string;
 
-    @Column({nullable: true})
-    @Field(() => String)
+    @Column({nullable: true, default: null})
+    @Field({nullable: true})
     customUrl?: string;
 
     @Column({default: 0})
     @Field(() => Number)
     clicks: number;
+
+    @CreateDateColumn()
+    @Field(() => Number)
+    created_at: Date;
+
+    @UpdateDateColumn()
+    @Field(() => Number)
+    updated_at: Date;
 }

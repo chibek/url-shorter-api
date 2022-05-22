@@ -8,6 +8,11 @@ export class ContextUrlResolver {
     constructor(private readonly urlService: ContextUrlService) {
     }
 
+    @Query(() => Url)
+    findOne(id: String) {
+        return this.urlService.findOne(id);
+    }
+
     @Query(() => [Url], {name: 'urls'})
     findAll() {
         return this.urlService.findAll();

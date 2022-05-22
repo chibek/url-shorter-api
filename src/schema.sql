@@ -13,14 +13,17 @@ type Mutation {
 }
 
 type Query {
+  findOne: Url!
   urls: [Url!]!
 }
 
 type Url {
   clicks: Float!
-  customUrl: String!
+  created_at: Float!
+  customUrl: String
   id: String!
   longUrl: String!
   name: String!
   shortUrl: String!
+  updated_at: Float!
 }
