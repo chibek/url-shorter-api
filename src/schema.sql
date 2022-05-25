@@ -13,7 +13,7 @@ type Mutation {
 }
 
 type Query {
-  findOne: Url!
+  findOne(id: String!): Url!
   urls: [Url!]!
 }
 

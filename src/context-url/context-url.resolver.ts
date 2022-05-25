@@ -9,12 +9,12 @@ export class ContextUrlResolver {
     }
 
     @Query(() => Url)
-    findOne(id: String) {
-        return this.urlService.findOne(id);
+    findOne(@Args('id', {type: () => String}) id: string): Promise<Url> {
+        return this.urlService.findOne({id: id});
     }
 
     @Query(() => [Url], {name: 'urls'})
-    findAll() {
+    findAll(): Promise<Url[]> {
         return this.urlService.findAll();
     }
 

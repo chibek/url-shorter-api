@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Url} from "./entities/url.entity";
-import {Repository} from "typeorm";
+import {FindOptionsWhere, Repository} from "typeorm";
 import {CreateUrlInput} from "./dto/create-url.input";
 
 @Injectable()
@@ -12,8 +12,8 @@ export class ContextUrlService {
     ) {
     }
 
-    findOne(id): Promise<Url> {
-        return this.urlRepository.findOneOrFail(id)
+    findOne(conditions: FindOptionsWhere<Url>): Promise<Url> {
+        return this.urlRepository.findOneOrFail({where: conditions})
     }
 
     findAll(): Promise<Url[]> {
