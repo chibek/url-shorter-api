@@ -3,7 +3,7 @@ import {Url} from "./entities/url.entity";
 import {Response} from "express";
 import {ContextUrlService} from "./context-url.service";
 
-@Controller()
+@Controller('link')
 export class ContextUrlController {
     constructor(private readonly urlService: ContextUrlService) {
     }
