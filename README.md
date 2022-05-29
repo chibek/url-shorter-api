@@ -1,7 +1,5 @@
 # url-shorter-api
 
-# url-shorter Frontend
-
 ## Built With
 
 <ul dir="auto">
