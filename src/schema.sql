@@ -10,11 +10,21 @@ input CreateUrlInput {
 
 type Mutation {
   create(createUrl: CreateUrlInput!): Url!
+  delete(id: String!): String!
+  update(updateUrl: UpdateUrlInput!): Url!
+  updateClick(id: String!): Url!
 }
 
 type Query {
   findOne(id: String!): Url!
   urls: [Url!]!
+}
+
+input UpdateUrlInput {
+  customUrl: String
+  id: String!
+  longUrl: String
+  name: String
 }
 
 type Url {
