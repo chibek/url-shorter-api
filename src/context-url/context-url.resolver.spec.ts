@@ -3,15 +3,17 @@ import {ContextUrlService} from "./context-url.service";
 import {Url} from "./entities/url.entity";
 import {Repository} from "typeorm";
 import {CreateUrlInput} from "./dto/create-url.input";
+import {PubSubService} from "../pubsub/pubsub.service";
 
 describe('ContextUrlResolver', () => {
     let urlResolver: ContextUrlResolver;
     let urlService: ContextUrlService;
     let urlRepository: Repository<Url>;
+    let pubSub: PubSubService;
 
     beforeEach(() => {
             urlService = new ContextUrlService(urlRepository);
-            urlResolver = new ContextUrlResolver(urlService);
+            urlResolver = new ContextUrlResolver(urlService,pubSub);
         }
     );
 

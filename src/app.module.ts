@@ -10,6 +10,8 @@ import {config} from './config/config';
 import {DatabaseConfig} from './config/database-config';
 import {join} from "path";
 import {ContexUrlModule} from './context-url/contex-url.module';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import {PubsubModule} from "./pubsub/pubsub.module";
 
 @Module({
     imports: [
@@ -25,7 +27,13 @@ import {ContexUrlModule} from './context-url/contex-url.module';
             driver: ApolloDriver,
             autoSchemaFile: join(process.cwd(), 'src/schema.sql'),
             sortSchema: true,
+            playground: false,
+            plugins: [ApolloServerPluginLandingPageLocalDefault()],
+            subscriptions: {
+                'subscriptions-transport-ws': true,
+            },
         }),
+        PubsubModule,
         ContexUrlModule,
     ],
     controllers: [],

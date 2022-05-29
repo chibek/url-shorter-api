@@ -1,5 +1,4 @@
 import {Controller, Get, HttpStatus, Param, Res} from '@nestjs/common';
-import {Url} from "./entities/url.entity";
 import {Response} from "express";
 import {ContextUrlService} from "./context-url.service";
 
@@ -10,7 +9,7 @@ export class ContextUrlController {
 
     @Get('/:name')
     async redirectToUrl(@Param('name') name: string, @Res() res: Response): Promise<void> {
-        const url: Url = await this.urlService.findOne({shortUrl: name});
-        return res.redirect(HttpStatus.FOUND, url.longUrl)
+        const updatedUrl = await this.urlService.updateClick({shortUrl: name});
+        return res.redirect(HttpStatus.FOUND, updatedUrl.longUrl)
     }
 }

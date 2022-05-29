@@ -4,6 +4,8 @@ import {Url} from "./entities/url.entity";
 import {FindOptionsWhere, Repository} from "typeorm";
 import {CreateUrlInput} from "./dto/create-url.input";
 import {UpdateUrlInput} from "./dto/update-url.input";
+import {SUBSCRIPTION_EVENTS} from "../pubsub/pubsub.constants";
+import {PubSubService} from "../pubsub/pubsub.service";
 
 
 @Injectable()
@@ -11,6 +13,7 @@ export class ContextUrlService {
     constructor(
         @InjectRepository(Url)
         private urlRepository: Repository<Url>,
+        private readonly pubsubService: PubSubService,
     ) {
     }
 
@@ -45,9 +48,12 @@ export class ContextUrlService {
         return id;
     }
 
-    async updateClick(@Param('id') id: string): Promise<Url> {
-        const urlUpdated: Url = await this.findOne({id: id});
+    async updateClick(conditions: FindOptionsWhere<Url>): Promise<Url> {
+        const urlUpdated: Url = await this.findOne(conditions);
         urlUpdated.clicks++;
+        await this.pubsubService.publish(SUBSCRIPTION_EVENTS.clickUpdate, {
+            'clickUpdate': {...urlUpdated}
+        });
         return this.urlRepository.save(urlUpdated);
     }
 }
