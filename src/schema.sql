@@ -20,6 +20,10 @@ type Query {
   urls: [Url!]!
 }
 
+type Subscription {
+  clickUpdate(id: String!): Url!
+}
+
 input UpdateUrlInput {
   customUrl: String
   id: String!

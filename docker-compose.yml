@@ -10,10 +10,10 @@ services:
       - "3004:3004"
     depends_on:
       - db
-#      - redis
+      - redis
     links:
       - db
-#      - redis
+      - redis
     volumes:
       - ./:/src
     command: npm run start:dev
@@ -30,14 +30,14 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
       - "5432:5432"
-#  redis:
-#    image: 'redis:alpine'
-#    ports:
-#      - 6379:${REDIS_PORT}
-#    volumes:
-#      - redis:/data
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - 6379:${REDIS_PORT}
+    volumes:
+      - redis:/data
 volumes:
   db:
     driver: local
-#  redis:
-#    driver: local
+  redis:
+    driver: local
