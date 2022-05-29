@@ -10,7 +10,7 @@ describe('ContextUrlController', () => {
     } as unknown as Response
 
     const mockUrlService = {
-        findOne: jest.fn(() => {
+        updateClick: jest.fn(() => {
             return {
                 Promise
             }
@@ -28,6 +28,6 @@ describe('ContextUrlController', () => {
 
     it('redirect url', () => {
         controller.redirectToUrl('123', responseMock)
-        expect(mockUrlService.findOne).toHaveBeenCalled();
+        expect(mockUrlService.updateClick).toHaveBeenCalled();
     });
 });

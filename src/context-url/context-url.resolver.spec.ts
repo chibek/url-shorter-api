@@ -12,8 +12,8 @@ describe('ContextUrlResolver', () => {
     let pubSub: PubSubService;
 
     beforeEach(() => {
-            urlService = new ContextUrlService(urlRepository);
-            urlResolver = new ContextUrlResolver(urlService,pubSub);
+            urlService = new ContextUrlService(urlRepository, pubSub);
+            urlResolver = new ContextUrlResolver(urlService, pubSub);
         }
     );
 
